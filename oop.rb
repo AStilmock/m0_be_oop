@@ -80,38 +80,33 @@
 #  it should have an is_old attribute that defaults to false. once a Hobbit is 101, it is old.
 #  it should have a has_ring attribute. If the Hobbit's name is "Frodo", true, if not, false.
  class Hobbit
-    def initialize(name, disposition, age=0, is_adult=false, is_old=false, has_ring=false)
+    def initialize(name, disposition, age = 0, is_adult=false, is_old=false, has_ring = false)
         @name = name
         @disposition = disposition
         @age = age
         @is_adult = is_adult
         @is_old = is_old
         @has_ring = has_ring
+        if @name == "Frodo"
+            @has_ring = true
+        end
     end
 
     def celebrate_birthday
-        celebrate_birthday = @age + 1
-    end
-
-    def adult_age(adult_num)
-        @age = adult_num
-        if adult_num>=33 && adult_num<=100
-        return @is_adult=true
-    end
-
-    def old_age(old_num)
-        @age = old_num
-        if old_num>=101
-            return @is_old=true
-    end
-    
-    def ring_bearer(new_name)
-        if new_name=="Frodo"
-            return @has_ring=true
+        celebrate_birthday = @age += 1
+        if @age >= 33 
+            @is_adult = true
+        end
+        if @age >= 101
+            @is_old = true
         end
     end
 end
 
 
 hobbit1 = Hobbit.new("Bilbo", "Grumpy")
+111.times { hobbit1.celebrate_birthday }
 p hobbit1
+hobbit_2 = Hobbit.new("Frodo", "Hungry")
+80.times { hobbit_2.celebrate_birthday }
+p hobbit_2
